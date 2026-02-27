@@ -35,18 +35,18 @@ const sequelize = new Sequelize(
     console.log("✅ Database connected successfully.");
 
     // Run migrations automatically in development
-    // if (process.env.NODE_ENV === "development") {
-    //   console.log("🔄 Running migrations...");
-    //   const { exec } = require("child_process");
-    //   exec("npm run migrate", (error, stdout) => {
-    //     if (error) {
-    //       console.error("❌ Migration error:", error);
-    //       return;
-    //     }
-    //     console.log("✅ Migrations completed");
-    //     if (stdout) console.log(stdout);
-    //   });
-    // }
+    if (process.env.NODE_ENV === "development") {
+      console.log("🔄 Running migrations...");
+      const { exec } = require("child_process");
+      exec("npm run migrate", (error, stdout) => {
+        if (error) {
+          console.error("❌ Migration error:", error);
+          return;
+        }
+        console.log("✅ Migrations completed");
+        if (stdout) console.log(stdout);
+      });
+    }
   } catch (err) {
     console.error("❌ Database connection failed:", err.message);
   }
