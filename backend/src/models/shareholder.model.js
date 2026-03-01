@@ -1,56 +1,60 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
 
-const Shareholder = sequelize.define('Shareholder', {
-  id: {
-    type: DataTypes.INTEGER,
+const Shareholder = sequelize.define(
+  "Shareholder",
+  {
+    id: {
+    type: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true
+    defaultValue: DataTypes.UUIDV4,
   },
-  companyId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: 'company_id',
-    references: {
-      model: 'companies',
-      key: 'id'
-    }
+    companyId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      field: "company_id",
+      references: {
+        model: "companies",
+        key: "id",
+      },
+    },
+    firstName: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      field: "first_name",
+      validate: {
+        notEmpty: {
+          msg: "First name is required",
+        },
+      },
+    },
+    lastName: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      field: "last_name",
+      validate: {
+        notEmpty: {
+          msg: "Last name is required",
+        },
+      },
+    },
+    nationality: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Nationality is required",
+        },
+      },
+    },
   },
-  firstName: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    field: 'first_name',
-    validate: {
-      notEmpty: {
-        msg: 'First name is required'
-      }
-    }
+  {
+    tableName: "shareholders",
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    underscored: true,
   },
-  lastName: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    field: 'last_name',
-    validate: {
-      notEmpty: {
-        msg: 'Last name is required'
-      }
-    }
-  },
-  nationality: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'Nationality is required'
-      }
-    }
-  }
-}, {
-  tableName: 'shareholders',
-  timestamps: true,
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
-  underscored: true
-});
+);
 
 module.exports = Shareholder;

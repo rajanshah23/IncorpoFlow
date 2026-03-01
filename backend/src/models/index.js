@@ -1,19 +1,19 @@
 const Company = require('./company.model');
-const shareholder = require('./shareholder.model');
+const Shareholder = require('./shareholder.model');
 
 // Define associations
-Company.hasMany(shareholder, {
+Company.hasMany(Shareholder, {
   foreignKey: 'companyId',
   as: 'shareholders',
   onDelete: 'CASCADE'
 });
 
-shareholder.belongsTo(Company, {
+Shareholder.belongsTo(Company, {
   foreignKey: 'companyId',
   as: 'company'
 });
 
 module.exports = {
   Company,
-  shareholder
+  Shareholder
 };

@@ -1,7 +1,7 @@
 {
   "name": "company-incorporation-backend",
   "version": "1.0.0",
-  "description":"Backend for Company Incorporation Tool",
+  "description": "Backend for Company Incorporation Tool",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -20,7 +20,7 @@
   "author": "Rajan Kumar Gupta",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies":{
+  "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",

@@ -1,4 +1,5 @@
 'use strict';
+const { v4: uuidv4 } = require('uuid');  // ✅ Correct import
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -21,6 +22,7 @@ module.exports = {
     if (companyMap['Tech Innovations Inc']) {
       shareholders.push(
         {
+          id: uuidv4(),  // ✅ Generate UUID
           company_id: companyMap['Tech Innovations Inc'],
           first_name: 'Rajan',
           last_name: 'Gupta',
@@ -29,6 +31,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add missing ID
           company_id: companyMap['Tech Innovations Inc'],
           first_name: 'Anish',
           last_name: 'Gupta',
@@ -37,6 +40,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add missing ID
           company_id: companyMap['Tech Innovations Inc'],
           first_name: 'Raj',
           last_name: 'Patel',
@@ -51,6 +55,7 @@ module.exports = {
     if (companyMap['Green Energy Solutions']) {
       shareholders.push(
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Green Energy Solutions'],
           first_name: 'Emma',
           last_name: 'K.C.',
@@ -59,6 +64,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Green Energy Solutions'],
           first_name: 'Hansraj',
           last_name: 'pandey',
@@ -73,6 +79,7 @@ module.exports = {
     if (companyMap['Digital Marketing Agency']) {
       shareholders.push(
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Digital Marketing Agency'],
           first_name: 'Alex',
           last_name: 'Martin',
@@ -81,6 +88,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Digital Marketing Agency'],
           first_name: 'merry',
           last_name: 'Rossi',
@@ -89,6 +97,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Digital Marketing Agency'],
           first_name: 'Yuzik',
           last_name: 'Tanaka',
@@ -97,6 +106,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Digital Marketing Agency'],
           first_name: 'Carlos',
           last_name: 'Silva',
@@ -111,6 +121,7 @@ module.exports = {
     if (companyMap['Global Trading LLC']) {
       shareholders.push(
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Global Trading LLC'],
           first_name: 'Michael',
           last_name: 'jain',
@@ -119,6 +130,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Global Trading LLC'],
           first_name: 'Fatima',
           last_name: 'kadri',
@@ -127,6 +139,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Global Trading LLC'],
           first_name: 'prabin',
           last_name: 'Mohara',
@@ -135,6 +148,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Global Trading LLC'],
           first_name: 'suman',
           last_name: 'desoza',
@@ -143,6 +157,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['Global Trading LLC'],
           first_name: 'jenny',
           last_name: 'pora',
@@ -157,6 +172,7 @@ module.exports = {
     if (companyMap['AI Research Labs']) {
       shareholders.push(
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['AI Research Labs'],
           first_name: 'David',
           last_name: 'warner',
@@ -165,6 +181,7 @@ module.exports = {
           updated_at: new Date()
         },
         {
+          id: uuidv4(),  // ✅ Add ID
           company_id: companyMap['AI Research Labs'],
           first_name: 'Priya',
           last_name: 'Singh',

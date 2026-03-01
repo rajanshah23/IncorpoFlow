@@ -1,11 +1,13 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const  sequelize  = require('../config/database');
+const { v4: uuidv4 } = require('uuid');
 
 const Company = sequelize.define('Company', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true
+    defaultValue:DataTypes.UUIDV4,
+    
   },
   name: {
     type: DataTypes.STRING(100),
