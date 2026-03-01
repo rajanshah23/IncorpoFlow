@@ -123,26 +123,24 @@ Frontend will be available at http://localhost:3001 (or another port if 3001 is 
 
 
 #  Database Setup (local)
-Make sure PostgreSQL is running and create the database
+   Make sure PostgreSQL is running and create the database
 
 ```SQL
 CREATE DATABASE company_incorporation_dev;
-
 ```
 Then run migrations as shown above.
 
-# Docker Setup (Recommended for Deployment / Easy Testing)
+##  Docker Setup
 With Docker, you don’t need to install Node.js or PostgreSQL on your host – everything runs in isolated containers.
 
 Environment Files Explained
 We use two separate .env files to keep concerns separate
 
-| file          |     Location   |                           Purpose                                 |         Uses When               |
+| file          |     Location   |                           Purpose                                 |         Used When               |
 |---------------|----------------|-------------------------------------------------------------------|---------------------------------|
 | .env          |  project root  | Configuration for Docker Compose (database password, ports, etc.) | Running docker-compose up       |
 |  backend/.env |   backend/     | Configuration for running the backend locally (without Docker)    | Running npm run dev on your host|
 ----------------------------------------------------------------------------------------------------------------------------------------
-Never commit real secrets. Both files are listed in .gitignore.
 Example templates are provided (.env.docker.example and backend/.env.example).
 
 
@@ -156,10 +154,11 @@ cd IncorpoFlow
 
 2. Set up environment variables for Docker
 Copy the example environment file and edit it with your own secure passwords
+
 ```bash
 cp .env.docker.example .env
-
 ```
+
 Open .env and change at least POSTGRES_PASSWORD to a strong password.
 All other variables are pre‑filled and should work as is.
 
@@ -193,8 +192,8 @@ If you have seed data, also run:
  docker exec -it incorporflow_backend npm run seed:docker
 ```
 6. Access the application
-    -Frontend: http://localhost
-    -Backend API: http://localhost:3000/api
+    -Frontend: http://localhost:80
+    -Backend API: http://localhost:3000/
 
 7. Stopping the application
 ```bash
@@ -204,13 +203,22 @@ Your database data remains in ./data/postgres and will be used next time you sta
 
 # Database Persistence
   PostgreSQL data is stored in ./data/postgres on your host (bind mount).
-  -This folder is not managed by Docker volumes – it's a plain directory.
-  -Even docker-compose down -v does not delete this folder; -v only removes Docker volumes.
+  --This folder is not managed by Docker volumes – it's a plain directory.
+  --Even docker-compose down -v does not delete this folder; -v only removes Docker volumes.
   
 # To completely reset the database, stop the containers and delete the folder
 ```bash
+# Rset database
 docker-compose down
+```
+```bash
+# Linux / macOS
 rm -rf ./data/postgres   # or remove manually
+
+```
+```bash
+# Windows (PowerShell)
+Remove-Item -Recurse -Force .\data\postgres
 ```
 
 # Useful Docker Commands
@@ -223,4 +231,99 @@ rm -rf ./data/postgres   # or remove manually
 | docker exec -it incorporflow_backend sh                         | Open a shell in the backend container        |
 | docker exec -it incorporflow_db psql -U postgres -d incorporflow| Connect to PostgreSQL inside container       |
 | docker-compose up -d --build backend                            | Rebuild and restart only the backend         |
- 
+
+
+## 🧪 API Testing
+
+Once the application is running (either via Docker or locally), you can interact with the API using `curl`, Postman, or your browser.
+
+**Base URL**  
+- **Docker / Production**: `http://localhost:3000/api/v1`  
+- **Local development**: `http://localhost:3000/api/v1`
+
+All endpoints return JSON.  
+Company IDs are **UUIDs** – replace `COMPANY_ID` in the examples with the actual ID returned from the API.
+
+---
+
+### 1. Create a Company (Step 1)
+**POST** `/companies`
+
+```bash
+curl -X POST http://localhost:3000/api/v1/companies \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Acme Inc",
+    "numberOfShareholders": 2,
+    "totalCapitalInvested": 100000
+  }'
+
+```
+
+### 2. Get All Companies (Admin View)
+**GET** `/companies`
+
+```bash
+curl http://localhost:3000/api/v1/companies
+
+```
+
+### 3. Get a Single Company by ID
+**GET** /companies/:id
+
+```bash
+curl http://localhost:3000/api/v1/companies/COMPANY_ID
+
+```
+
+### 4. Update a Company Draft
+**PUT** /companies/:id
+
+```bash
+curl -X PUT http://localhost:3000/api/v1/companies/COMPANY_ID \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Acme International",
+    "numberOfShareholders": 3,
+    "totalCapitalInvested": 150000
+  }'
+
+```
+
+### 5. Add Shareholders to a Company (Step 2)
+**POST** /companies/:companyId/shareholders
+```bash
+curl -X POST http://localhost:3000/api/v1/companies/COMPANY_ID/shareholders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shareholders": [
+      {"firstName": "John", "lastName": "Doe", "nationality": "US"},
+      {"firstName": "Jane", "lastName": "Smith", "nationality": "UK"}
+    ]
+  }'
+
+```
+
+### 6. Delete a Company (Only if it has no shareholders)
+**DELETE** /companies/:id
+```bash
+curl -X DELETE http://localhost:3000/api/v1/companies/COMPANY_ID
+```
+
+###  Delete All Shareholders of a Company
+**DELETE** /companies/:companyId/shareholders
+```bash
+curl -X DELETE http://localhost:3000/api/v1/companies/COMPANY_ID/shareholders
+
+```
+
+### 8. Delete a Company and Its Shareholders (Cascade)
+**DELETE** /companies/:id/cascade
+```bash
+curl -X DELETE http://localhost:3000/api/v1/companies/COMPANY_ID/cascade
+```
+This removes the company and all associated shareholders in one operation.
+
+Note: All DELETE operations are irreversible. Use with caution.
+
+
