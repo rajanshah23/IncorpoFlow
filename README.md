@@ -1,4 +1,4 @@
-# IncorpoFlow – Company Incorporation Tool
+ # IncorpoFlow – Company Incorporation Tool
 
 A full‑stack application for multi‑step company incorporation with draft persistence and admin view.  
 Built with **Node.js**, **Express**, **React**, **PostgreSQL**, and **Docker**.
@@ -36,7 +36,7 @@ Built with **Node.js**, **Express**, **React**, **PostgreSQL**, and **Docker**.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer       | Technologies                                    |
 |-------------|-------------------------------------------------|
@@ -46,7 +46,7 @@ Built with **Node.js**, **Express**, **React**, **PostgreSQL**, and **Docker**.
 
 ---
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -61,16 +61,15 @@ Built with **Node.js**, **Express**, **React**, **PostgreSQL**, and **Docker**.
 Run the backend and frontend directly on your machine for active development.
 
 ### Backend Setup
-
 ```bash
 cd backend
-
 ```
-# Copy environment variables template
+### Copy environment variables template
+```bash
 cp .env.example .env
+```
 
-
-# Edit .env with your local PostgreSQL credentials
+### Edit .env with your local PostgreSQL credentials
 ```bash
   DB_HOST=localhost
   DB_PORT=5432
@@ -78,63 +77,55 @@ cp .env.example .env
   DB_USER=postgres
   DB_PASSWORD=yourpassword
 ```
-# Install dependencies
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-# Run database migrations
+### Run database migrations
 ```bash
 npm run migrate
 
 ```
-# (Optional) Seed initial data
+### (Optional) Seed initial data
 ```bash
 npm run seed
 
 ```
-# Start development server with auto‑reload
+### Start development server with auto‑reload
 ```bash
 npm run dev
 
 ```
-Backend API will be available at http://localhost:3000/api.
-
- 
+Backend API will be available at http://localhost:3000/.
 ```
 ```
-# Frontend Setup
+## Frontend Setup
 ```bash
 cd frontend
-
 ```
-# Install dependencies
+## Install dependencies
 ```bash
 npm install
-
 ```
-# Start development server
+## Start development server
 ```bash
 npm start
-
 ```
-Frontend will be available at http://localhost:3001 (or another port if 3001 is busy).
+Frontend will be available at http://localhost:5173/ (or another port if 5173 is busy).
 
 
-#  Database Setup (local)
+##  Database Setup (local)
    Make sure PostgreSQL is running and create the database
-
-```SQL
+```bash
 CREATE DATABASE company_incorporation_dev;
 ```
 Then run migrations as shown above.
 
-##  Docker Setup
+## Docker Setup(Recommended)
 With Docker, you don’t need to install Node.js or PostgreSQL on your host – everything runs in isolated containers.
-
-Environment Files Explained
-We use two separate .env files to keep concerns separate
+Environment Files Explained : We use two separate .env files to keep concerns separate
 
 | file          |     Location   |                           Purpose                                 |         Used When               |
 |---------------|----------------|-------------------------------------------------------------------|---------------------------------|
@@ -144,84 +135,77 @@ We use two separate .env files to keep concerns separate
 Example templates are provided (.env.docker.example and backend/.env.example).
 
 
-# Quick Start with Docker
+## Quick Start with Docker
 
 1. Clone the repository
- ```bash
-git clone https://github.com/rajanshah23/IncorpoFlow.git
-cd IncorpoFlow
-```
+    ```bash
+     git clone https://github.com/rajanshah23/IncorpoFlow.git
+     cd IncorpoFlow
+    ```
 
 2. Set up environment variables for Docker
-Copy the example environment file and edit it with your own secure passwords
-
-```bash
-cp .env.docker.example .env
-```
-
+			Copy the example environment file and edit it with your own secure passwords		
+	```bash
+	cp .env.docker.example .env
 Open .env and change at least POSTGRES_PASSWORD to a strong password.
 All other variables are pre‑filled and should work as is.
 
 3. Create the database data folder (on your host)
    PostgreSQL will store its data in a folder on your computer so it survives container restarts
-```bash
-# Linux / macOS
-mkdir -p ./data/postgres
+     ```bash
+       # Linux / macOS
+         mkdir -p ./data/postgres
 
-# Windows (PowerShell)
-New-Item -ItemType Directory -Path .\data\postgres -Force
-
-```
+       # Windows (PowerShell)
+         New-Item -ItemType Directory -Path .\data\postgres -Force
 4. Build and start the containers
-```bash
-docker-compose up -d --build
-```
-
-This starts:
--PostgreSQL on port 5432 (mapped to host)
--Backend API on port 3000
--Frontend (served by Nginx) on port 80
+   ```bash
+   docker-compose up -d --build
+   ```
+   This starts:
+   -  Postgres on port 5432 (mapped to host)
+   - Backend API on port 3000
+   - Frontend (served by Nginx) on port 80
 
 5. Run database migrations (first time only)
 The database is empty initially. Run migrations to create the tables:
-```bash
- docker exec -it incorporflow_backend npm run migrate:docker
-```
-If you have seed data, also run:
-```bash
- docker exec -it incorporflow_backend npm run seed:docker
-```
-6. Access the application
-    -Frontend: http://localhost:80
-    -Backend API: http://localhost:3000/
+   ```bash
+    docker exec -it incorporflow_backend npm run migrate:docker
+     ```
+    If you have seed data, also run:
+    ```bash
+     docker exec -it incorporflow_backend npm run seed:docker
+ 6. Access the application
+    - Frontend: http://localhost:80
+    - Backend API: http://localhost:3000/
 
 7. Stopping the application
-```bash
-docker-compose down
-```
+   ```bash
+    docker-compose down
+ 
 Your database data remains in ./data/postgres and will be used next time you start.
 
-# Database Persistence
+## Database Persistence
   PostgreSQL data is stored in ./data/postgres on your host (bind mount).
-  --This folder is not managed by Docker volumes – it's a plain directory.
-  --Even docker-compose down -v does not delete this folder; -v only removes Docker volumes.
+  - This folder is not managed by Docker volumes – it's a plain directory.
+  - Even docker-compose down -v does not delete this folder; -v only removes Docker volumes.
   
-# To completely reset the database, stop the containers and delete the folder
+## To completely reset the database, stop the containers and delete the folder
+  ```bash
+   # Reset database
+     docker-compose down
+  ```
 ```bash
-# Rset database
-docker-compose down
-```
-```bash
-# Linux / macOS
-rm -rf ./data/postgres   # or remove manually
+ # Linux / macOS
+   rm -rf ./data/postgres   # or remove manually
 
 ```
 ```bash
-# Windows (PowerShell)
-Remove-Item -Recurse -Force .\data\postgres
+ # Windows (PowerShell)
+   Remove-Item -Recurse -Force .\data\postgres
 ```
 
-# Useful Docker Commands
+## Useful Docker Commands
 
 |                  Command                                        |                          Description         |  
 |-----------------------------------------------------------------|----------------------------------------------|
@@ -310,7 +294,7 @@ curl -X POST http://localhost:3000/api/v1/companies/COMPANY_ID/shareholders \
 curl -X DELETE http://localhost:3000/api/v1/companies/COMPANY_ID
 ```
 
-###  Delete All Shareholders of a Company
+### 7.  Delete All Shareholders of a Company
 **DELETE** /companies/:companyId/shareholders
 ```bash
 curl -X DELETE http://localhost:3000/api/v1/companies/COMPANY_ID/shareholders
@@ -326,4 +310,19 @@ This removes the company and all associated shareholders in one operation.
 
 Note: All DELETE operations are irreversible. Use with caution.
 
+## Troubleshooting
+ 
+|Problem         |     Likely Cause|                         Solution                              |                    |
+|---------------|----------------|-------------------------------------------------------------------|---------------------------------|
+|  Backend cannot connect to database in Docker| Password mismatch between `POSTGRES_PASSWORD` and `DB_PASSWORD` in `.env` | Ensure they are identical. |  
+| `ECONNREFUSED ::1:5432` when running migrations inside Docker |   Using wrong environment – Sequelize CLI defaults to `development` config  | Run `docker exec ... npm run migrate:docker` (uses `--env docker`). | 
+|Port already in use (e.g., 3000, 5432 | Another service is using the port|Change mapped ports in `docker-compose.yml` (e.g., `"3001:3000"`).|
+|Database data lost after `docker-compose down` |Data not persisted |Make sure you have a bind mount `./data/postgres:/var/lib/postgresql/data` in compose file. |
+|Frontend shows blank page / cannot reach API |CORS or wrong API base URL |In frontend code, ensure API calls point to `http://localhost:3000/api/v1`. |
+|
+ 
+## 👤 Author
 
+**Rajan Shah**  
+GitHub: [@rajanshah23](https://github.com/rajanshah23)  
+Project Link: [https://github.com/rajanshah23/IncorpoFlow](https://github.com/rajanshah23/IncorpoFlow)
