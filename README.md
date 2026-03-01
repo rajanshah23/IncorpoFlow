@@ -71,37 +71,51 @@ cp .env.example .env
 
 
 # Edit .env with your local PostgreSQL credentials
-# Example:
-# DB_HOST=localhost
-# DB_PORT=5432
-# DB_NAME=company_incorporation_dev
-# DB_USER=postgres
-# DB_PASSWORD=yourpassword
-
+```bash
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_NAME=company_incorporation_dev
+  DB_USER=postgres
+  DB_PASSWORD=yourpassword
+```
 # Install dependencies
+
+```bash
 npm install
+```
 
 # Run database migrations
+```bash
 npm run migrate
 
+```
 # (Optional) Seed initial data
+```bash
 npm run seed
 
+```
 # Start development server with auto‑reload
+```bash
 npm run dev
 
+```
 Backend API will be available at http://localhost:3000/api.
 
+ 
 ```
 ```
 # Frontend Setup
 ```bash
 cd frontend
 
+```
 # Install dependencies
+```bash
 npm install
 
+```
 # Start development server
+```bash
 npm start
 
 ```
@@ -111,8 +125,9 @@ Frontend will be available at http://localhost:3001 (or another port if 3001 is 
 #  Database Setup (local)
 Make sure PostgreSQL is running and create the database
 
-```sql
+```SQL
 CREATE DATABASE company_incorporation_dev;
+
 ```
 Then run migrations as shown above.
 
@@ -120,7 +135,7 @@ Then run migrations as shown above.
 With Docker, you don’t need to install Node.js or PostgreSQL on your host – everything runs in isolated containers.
 
 Environment Files Explained
-We use two separate .env files to keep concerns separat
+We use two separate .env files to keep concerns separate
 
 | file          |     Location   |                           Purpose                                 |         Uses When               |
 |---------------|----------------|-------------------------------------------------------------------|---------------------------------|
@@ -129,6 +144,7 @@ We use two separate .env files to keep concerns separat
 ----------------------------------------------------------------------------------------------------------------------------------------
 Never commit real secrets. Both files are listed in .gitignore.
 Example templates are provided (.env.docker.example and backend/.env.example).
+
 
 # Quick Start with Docker
 
@@ -139,8 +155,7 @@ cd IncorpoFlow
 ```
 
 2. Set up environment variables for Docker
-
-   Copy the example environment file and edit it with your own secure passwords
+Copy the example environment file and edit it with your own secure passwords
 ```bash
 cp .env.docker.example .env
 
@@ -162,6 +177,7 @@ New-Item -ItemType Directory -Path .\data\postgres -Force
 ```bash
 docker-compose up -d --build
 ```
+
 This starts:
 -PostgreSQL on port 5432 (mapped to host)
 -Backend API on port 3000
