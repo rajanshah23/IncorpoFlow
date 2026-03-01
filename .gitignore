@@ -1,0 +1,76 @@
+# ==========================
+# Node.js / NPM  
+# ==========================
+node_modules/
+npm-debug.log*
+
+
+# ==========================
+# Build / Dist folders
+# ==========================
+dist/
+build/
+out/
+
+
+# ==========================
+# Environment / Secret files
+# ==========================
+# Ignore all .env files anywhere in the project
+**/.env*
+backend/.env
+
+# ==========================
+# PostgreSQL data folder
+# ==========================
+data/
+
+
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+npm-debug.log*
+
+
+# ==========================
+# OS / IDE / Editor files
+# ==========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================
+# Docker
+# ==========================
+docker-compose.override.yml
+docker-compose.override.yaml
+**/docker.env
+*.dockerfile
+
+
+# ==========================
+# Frontend / React / Next.js
+# ==========================
+.next/
+out/
+*.next
+*.cache
+
+# ==========================
+# Backend / Sequelize
+# ==========================
+sequelize-meta.json
+
+# ==========================
+# Misc
+# ==========================
+*.tgz

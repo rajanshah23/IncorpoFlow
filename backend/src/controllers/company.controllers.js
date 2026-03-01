@@ -1,10 +1,6 @@
 const { Company, Shareholder } = require('../models');
 const { ValidationError } = require('sequelize');
 
-console.log('Company model loaded:', !!Company);
-console.log('Shareholder model loaded:', !!Shareholder);
-console.log('Shareholder prototype:', Shareholder ? Object.getPrototypeOf(Shareholder).name : 'undefined');
-
 
 const companyController = {
   // ========== CREATE COMPANY (Step 1) ==========

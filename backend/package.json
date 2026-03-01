@@ -13,8 +13,9 @@
     "seed:undo": "npx sequelize-cli db:seed:undo",
     "seed:undo:all": "npx sequelize-cli db:seed:undo:all",
     "db:reset": "npm run migrate:undo:all && npm run migrate && npm run seed",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
+   "migrate:docker": "npx sequelize-cli db:migrate --env docker",
+   "seed:docker": "npx sequelize-cli db:seed:all --env docker",
+   "db:reset:docker": "npm run migrate:undo:all -- --env docker && npm run migrate:docker && npm run seed:docker"
   },
   "keywords": [],
   "author": "Rajan Kumar Gupta",
@@ -28,7 +29,7 @@
     "pg": "^8.19.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
-    "uuid": "^13.0.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
