@@ -1,31 +1,61 @@
 # ==========================
-# Node.js / NPM  
+# Environment Files
 # ==========================
-node_modules/
-npm-debug.log*
+# Ignore actual environment files (not examples)
+**/.env
+**/.env.local
+**/.env.development
+**/.env.production
+**/.env.staging
+**/.env.test
 
+# But KEEP example environment files
+!.env.example
+!.env.docker.example
+!backend/.env.example
+!frontend/.env.example
+!**/.env.example
+
+# ==========================
+# Node.js / NPM
+# ==========================
+**/node_modules/
+**/npm-debug.log*
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
 
 # ==========================
 # Build / Dist folders
 # ==========================
-dist/
-build/
-out/
-
-
-# ==========================
-# Environment / Secret files
-# ==========================
-# Ignore all .env files anywhere in the project
-**/.env*
-backend/.env
+**/dist/
+**/build/
+**/out/
+**/.next/
+**/.cache/
 
 # ==========================
-# PostgreSQL data folder
+# Backend
+# ==========================
+backend/coverage/
+backend/.nyc_output/
+backend/sequelize-meta.json
+backend/logs/
+backend/*.log
+
+# ==========================
+# Frontend
+# ==========================
+frontend/.vite/
+frontend/.vitepress/cache/
+
+# ==========================
+# Database
 # ==========================
 data/
-
-
+*.db
+*.sqlite
+*.sqlite3
 
 # ==========================
 # Logs
@@ -33,15 +63,21 @@ data/
 logs/
 *.log
 npm-debug.log*
-
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # ==========================
 # OS / IDE / Editor files
 # ==========================
 .DS_Store
 Thumbs.db
+desktop.ini
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 *.suo
 *.ntvs*
 *.njsproj
@@ -54,23 +90,14 @@ Thumbs.db
 docker-compose.override.yml
 docker-compose.override.yaml
 **/docker.env
-*.dockerfile
-
-
-# ==========================
-# Frontend / React / Next.js
-# ==========================
-.next/
-out/
-*.next
-*.cache
-
-# ==========================
-# Backend / Sequelize
-# ==========================
-sequelize-meta.json
 
 # ==========================
 # Misc
 # ==========================
 *.tgz
+*.tar.gz
+.DS_Store
+.env.keys
+*.pem
+*.p12
+*.pfx
