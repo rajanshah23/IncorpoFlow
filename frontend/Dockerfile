@@ -1,29 +1,31 @@
-# frontend/Dockerfile
-FROM node:18-alpine as build
+# Build stage - Use Node 18 (LTS)
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies (including dev dependencies for build)
-RUN npm ci
+# Generate package-lock.json if it doesn't exist and install dependencies
+RUN npm install --package-lock-only && npm ci
 
-# Copy application code
+# Copy source code
 COPY . .
 
-# Build the React app
+# Build the app
 RUN npm run build
 
-# Production stage with nginx
+# Production stage
 FROM nginx:alpine
 
 # Copy built assets from build stage
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom nginx config if needed
-# COPY nginx.conf /etc/nginx/nginx.conf
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Expose port 80
 EXPOSE 80
 
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]

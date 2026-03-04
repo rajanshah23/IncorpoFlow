@@ -44,15 +44,18 @@ services:
       - ./backend:/app
       - /app/node_modules
 
-  # frontend:
-  #   build: ./frontend
-  #   container_name: incorporflow_frontend
-  #   ports:
-  #     - "${FRONTEND_PORT}:80"
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - incorporflow_network
+  frontend:
+    build: ./frontend
+    container_name: incorporflow_frontend
+    ports:
+      - "${FRONTEND_PORT}:80"
+      - "80:80"
+    environment:
+      - VITE_API_URL=http://localhost:${BACKEND_PORT}
+    depends_on:
+      - backend
+    networks:
+      - incorporflow_network
 
 networks:
   incorporflow_network:
