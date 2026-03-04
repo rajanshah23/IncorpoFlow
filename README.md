@@ -40,9 +40,9 @@ Built with **Node.js**, **Express**, **React**, **PostgreSQL**, and **Docker**.
 
 | Layer       | Technologies                                    |
 |-------------|-------------------------------------------------|
-| Backend     | Node.js, Express, Sequelize (ORM), PostgreSQL  |
-| Frontend    | React, React Hook Form, Axios                   |
-| DevOps      | Docker, Docker Compose, Nginx                    |
+| Backend     | Node.js, Express, Sequelize (ORM), PostgreSQL   |
+| Frontend    | React, React Hook Form, Axios ,Vite             |
+| DevOps      | Docker, Docker Compose, Nginx                   |
 
 ---
 
@@ -113,8 +113,7 @@ npm install
 ```bash
 npm start
 ```
-Frontend will be available at http://localhost:5173/ (or another port if 5173 is busy).
-
+Frontend will be available at http://localhost:5173/ (Vite's default port).
 
 ##  Database Setup (local)
    Make sure PostgreSQL is running and create the database
@@ -163,7 +162,7 @@ All other variables are pre‑filled and should work as is.
    docker-compose up -d --build
    ```
    This starts:
-   -  Postgres on port 5432 (mapped to host)
+   - Postgres on port 5432 (mapped to host)
    - Backend API on port 3000
    - Frontend (served by Nginx) on port 80
 
@@ -222,7 +221,7 @@ Your database data remains in ./data/postgres and will be used next time you sta
 Once the application is running (either via Docker or locally), you can interact with the API using `curl`, Postman, or your browser.
 
 **Base URL**  
-- **Docker / Production**: `http://localhost:3000/api/v1`  
+- **Docker**: `http://localhost:3000/api/v1`  
 - **Local development**: `http://localhost:3000/api/v1`
 
 All endpoints return JSON.  
